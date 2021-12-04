@@ -1,5 +1,6 @@
 ﻿using FFS.Data.Configurations;
 using FFS.Data.Entities;
+using FFS.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace FFS.Data.EF
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Configure using Fluent API
             modelBuilder.ApplyConfiguration(new AppConfigConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
@@ -28,7 +30,9 @@ namespace FFS.Data.EF
             modelBuilder.ApplyConfiguration(new ProductTranslationConfiguration());
             modelBuilder.ApplyConfiguration(new PromotionConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
-
+            //Data seeding
+            modelBuilder.Seed();
+            
             // base.OnModelCreating(modelBuilder);
         }
         public DbSet<Product> Products { get; set; }
