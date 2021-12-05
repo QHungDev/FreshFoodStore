@@ -4,14 +4,16 @@ using FFS.Data.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FFS.Data.Migrations
 {
     [DbContext(typeof(FFSDbContext))]
-    partial class FFSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211205185356_AspNetIdentityDatabase")]
+    partial class AspNetIdentityDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,17 +38,17 @@ namespace FFS.Data.Migrations
                         new
                         {
                             Key = "HomeTitle",
-                            Value = "This is home page of eShopSolution"
+                            Value = "This is home page of Fresh Food Store"
                         },
                         new
                         {
                             Key = "HomeKeyword",
-                            Value = "This is keyword of eShopSolution"
+                            Value = "This is keyword of Fresh Food Store"
                         },
                         new
                         {
                             Key = "HomeDescription",
-                            Value = "This is description of eShopSolution"
+                            Value = "This is description of Fresh Food Store"
                         });
                 });
 
@@ -73,16 +75,6 @@ namespace FFS.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AppRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("c28f66ae-186e-4c5f-9df3-86b07f431013"),
-                            ConcurrencyStamp = "0967c940-cded-4f5c-80af-38ed0b61cba5",
-                            Description = "Administrator Role",
-                            Name = "admin",
-                            NormalizedName = "admin"
-                        });
                 });
 
             modelBuilder.Entity("FFS.Data.Entities.AppUser", b =>
@@ -149,27 +141,6 @@ namespace FFS.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AppUsers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("c0d575dd-ee8b-4905-8fca-59f5ac4a05cd"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "845508ed-40bb-4cbe-b307-6f95de2b7a04",
-                            Dob = new DateTime(2021, 12, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "truongquochung204@gmail.com",
-                            EmailConfirmed = true,
-                            FirstName = "Toan",
-                            LastName = "Bach",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "truongquochung204@gmail.com",
-                            NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMWUNTFFW5fdSiCdSsgGXrPImOSzLkYe3KIqes3E2R6GHJVBoiKoU7YFFlxATJ/gYQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "",
-                            TwoFactorEnabled = false,
-                            UserName = "admin"
-                        });
                 });
 
             modelBuilder.Entity("FFS.Data.Entities.Cart", b =>
@@ -511,7 +482,7 @@ namespace FFS.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2021, 12, 6, 2, 6, 37, 660, DateTimeKind.Local).AddTicks(3204),
+                            DateCreated = new DateTime(2021, 12, 6, 1, 53, 56, 256, DateTimeKind.Local).AddTicks(4055),
                             OriginalPrice = 100000m,
                             Price = 200000m,
                             Stock = 0,
@@ -810,13 +781,6 @@ namespace FFS.Data.Migrations
                     b.HasKey("UserId", "RoleId");
 
                     b.ToTable("AppUserRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = new Guid("c0d575dd-ee8b-4905-8fca-59f5ac4a05cd"),
-                            RoleId = new Guid("c28f66ae-186e-4c5f-9df3-86b07f431013")
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
