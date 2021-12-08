@@ -13,9 +13,9 @@ namespace FFS.Data.Extensions
         public static void Seed(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AppConfig>().HasData(
-               new AppConfig() { Key = "HomeTitle", Value = "This is home page of eShopSolution" },
-               new AppConfig() { Key = "HomeKeyword", Value = "This is keyword of eShopSolution" },
-               new AppConfig() { Key = "HomeDescription", Value = "This is description of eShopSolution" }
+               new AppConfig() { Key = "HomeTitle", Value = "This is home page of Fresh Food Store" },
+               new AppConfig() { Key = "HomeKeyword", Value = "This is keyword of Fresh Food Store" },
+               new AppConfig() { Key = "HomeDescription", Value = "This is description of Fresh Food Store" }
                );
             modelBuilder.Entity<Language>().HasData(
                 new Language() { Id = "vi-VN", Name = "Tiếng Việt", IsDefault = true },
@@ -107,8 +107,8 @@ namespace FFS.Data.Extensions
                 EmailConfirmed = true,
                 PasswordHash = hasher.HashPassword(null, "Abcd1234$"),
                 SecurityStamp = string.Empty,
-                FirstName = "Toan",
-                LastName = "Bach",
+                FirstName = "Quoc",
+                LastName = "Hung",
                 Dob = new DateTime(2021, 12, 06)
             });
 
