@@ -6,7 +6,12 @@ namespace FFS.Utilities.Constants
 {
     public class SystemConstants
     {
-            public const string MainConnectionString = "FreshFoodStoreDb";
-        
+        public const string MainConnectionString = "FreshFoodStoreDb";
+        public class AppSettings
+        {
+            public const string DefaultLanguageId = "DefaultLanguageId";
+            public const string Token = "Token";
+            public const string BaseAddress = "BaseAddress";
+        }
     }
 }

@@ -4,6 +4,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,16 +29,27 @@ namespace FFS.AdminSite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient();
+
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
-                    options.LoginPath = "/User/Login/";
+                    options.LoginPath = "/Login/Index";
                     options.AccessDeniedPath = "/User/Forbidden/";
                 });
+
             services.AddControllersWithViews()
                      .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
-            services.AddTransient<IUserApiClient, UserApiClient>();
 
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddTransient<IUserApiClient, UserApiClient>();
+            services.AddTransient<IRoleApiClient, RoleApiClient>();
+            services.AddTransient<ILanguageApiClient, LanguageApiClient>();
+            services.AddTransient<IProductApiClient, ProductApiClient>();
             IMvcBuilder builder = services.AddRazorPages();
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
@@ -47,7 +59,6 @@ namespace FFS.AdminSite
                 builder.AddRazorRuntimeCompilation();
             }
 #endif
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,11 +76,13 @@ namespace FFS.AdminSite
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
             app.UseAuthentication();
+
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

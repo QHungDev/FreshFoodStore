@@ -7,6 +7,7 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/font-awesome.css" rel="stylesheet" />
     <link href="~/Plugins/fancybox/jquery.fancybox.css" rel="stylesheet" />
+    <link href="~/Content/sweetalert2.css" rel="stylesheet" />
     <link href="~/Content/style.css" rel="stylesheet" />
     <link href="~/Content/mystyle.css" rel="stylesheet" />
     <link href="~/Plugins/jQuery.filer.1.3.0/css/jquery.filer.css" rel="stylesheet" />
@@ -30,7 +31,7 @@
                 <div id="main-menu" class="main-menu collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active">
-                            <a href="../admin/Default.aspx"><i class="menu-icon fa fa-dashboard mr-3" title="Bảng Điều Khiển"></i>Bảng Điều Khiển</a>
+                            <a href="/"><i class="menu-icon fa fa-dashboard mr-3" title="Bảng Điều Khiển"></i>Bảng Điều Khiển</a>
                         </li>
 
                         <h3 class="menu-title">Sản Phẩm</h3>
@@ -41,15 +42,15 @@
                             <a href="../admin/product-category.aspx"><i class="menu-icon fa fa-list-ul mr-3" title="Danh Mục Cấp Con"></i>Danh Mục Cấp Con</a>
                         </li>
                         <li>
-                            <a href="../admin/product-list.aspx"><i class="menu-icon fa fa-product-hunt mr-3" title="Sản Phẩm"></i>Sản Phẩm</a>
+                            <a asp-controller="Product" asp-action="Index"><i class="menu-icon fa fa-product-hunt mr-3" title="Sản Phẩm"></i>Sản Phẩm</a>
                         </li>
 
-                        <h3 class="menu-title">Bài Viết</h3>
+                        <h3 class="menu-title">Người dùng</h3>
                         <li>
-                            <a href="../admin/article-category.aspx"><i class="menu-icon fa fa-list-ul mr-3" title="Thể Loại Bài Viết"></i>Thể Loại Bài Viết</a>
+                            <a asp-action="Index" asp-controller="User"><i class="menu-icon fa fa-list-ul mr-3" title="Thể Loại Bài Viết"></i>Danh sách người dùng</a>
                         </li>
                         <li>
-                            <a href="../admin/article-list.aspx"><i class="menu-icon fa fa-sticky-note mr-3" title="Bài Viết"></i>Bài Viết</a>
+                            <a asp-action="Create" asp-controller="User"><i class="menu-icon fa fa-sticky-note mr-3" title="Bài Viết"></i>Thêm mới</a>
                         </li>
 
                         <h3 class="menu-title">Quản Lý</h3>
@@ -70,10 +71,10 @@
         <div id="content">
             <header class="header">
                 <div class="row">
-                    <div class="col-sm-9">
+                    <div class="col-sm-8">
                         <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
                         <div class="page-header float-left">
-                            <h1>Xin chào, <span href="/Profile/Index">@User.Identity.Name</span>!</h1>
+                            <h1>Xin chào, <span runat="server" id="a_FullName">@User.Identity.Name</span>!</h1>
                         </div>
                     </div>
                     <div class="col-sm-2">
@@ -90,6 +91,7 @@
                             </a>
                         </div>
                     </div>
+                    @await Component.InvokeAsync("Navigation")
                     <div class="col-sm-1">
                         <div class="user-area dropdown float-right">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -98,6 +100,7 @@
                             <div class="user-menu dropdown-menu">
                                 <a id="a_ChangePassword" class="nav-link" href="/admin/admin-detail.aspx"><i class="fa fa-user mr-1"></i> Thông Tin</a>
                                 <a class="nav-link" title="View" target="_blank" href="/Default.aspx"><i class="fa fa-eye mr-1"></i> Xem Trang Chủ</a>
+
                                 <form method="post" asp-controller="User" asp-action="Logout">
                                     <button type="submit" class="nav-link">
                                         <i class="fa fa-power-off mr-1"></i> Đăng Xuất
@@ -106,27 +109,31 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </header>
-        </div>
-        <div>
-            @RenderBody()
+            <div class="workplace">
+                    @RenderBody()
+            </div>
         </div>
     </div>
 
+    
 
-
-    <script src="~/Scripts/popper.js"></script>
-    <script src="~/Scripts/jquery-3.0.0.js"></script>
-    <script src="~/Plugins/tinyeditor/1.jquery.tinymce.min.js"></script>
-    <script src="~/Plugins/tinyeditor/2.tinymce.min.js"></script>
-    <script src="~/Plugins/tinyeditor/3.tinymce.customfunction.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-    <script src="~/Plugins/fancybox/jquery.fancybox.js"></script>
-    <script src="~/Scripts/fullobf.js"></script>
-    <script src="~/Scripts/script.js"></script>
-    <script src="~/Plugins/jQuery.filer.1.3.0/js/jquery.filer.js"></script>
-    <script src="~/Plugins/jQuery.filer.1.3.0/js/jquery.filer.custom.js"></script>
+    <div>
+        <script src="~/Scripts/popper.js"></script>
+        <script src="~/Scripts/jquery-3.0.0.js"></script>
+        <script src="~/Plugins/tinyeditor/1.jquery.tinymce.min.js"></script>
+        <script src="~/Plugins/tinyeditor/2.tinymce.min.js"></script>
+        <script src="~/Plugins/tinyeditor/3.tinymce.customfunction.js"></script>
+        <script src="~/Scripts/bootstrap.js"></script>
+        <script src="~/Plugins/fancybox/jquery.fancybox.js"></script>
+        <script src="~/Scripts/fullobf.js"></script>
+        <script src="~/Scripts/script.js"></script>
+        <script src="~/Scripts/sweetalert2.all.min.js"></script>
+        <script src="~/Plugins/jQuery.filer.1.3.0/js/jquery.filer.js"></script>
+        <script src="~/Plugins/jQuery.filer.1.3.0/js/jquery.filer.custom.js"></script>
+    </div>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

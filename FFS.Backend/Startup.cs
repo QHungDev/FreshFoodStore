@@ -1,5 +1,7 @@
 using FFS.Application.Catalog.Products;
 using FFS.Application.Common;
+using FFS.Application.System.Languages;
+using FFS.Application.System.Roles;
 using FFS.Application.System.Users;
 using FFS.Data.EF;
 using FFS.Data.Entities;
@@ -38,25 +40,32 @@ namespace FFS.Backend
         {
             services.AddDbContext<FFSDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString(SystemConstants.MainConnectionString)));
+
             services.AddIdentity<AppUser, AppRole>()
-               .AddEntityFrameworkStores<FFSDbContext>()
-               .AddDefaultTokenProviders();
-            //declare
+                .AddEntityFrameworkStores<FFSDbContext>()
+                .AddDefaultTokenProviders();
+
+            //Declare DI
             services.AddTransient<IStorageService, FileStorageService>();
 
-            services.AddTransient<IPublicProductService, PublicProductService>();
-            services.AddTransient<IManageProductService, ManageProductService>();
+            services.AddTransient<IProductService, ProductService>();
             services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
             services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
+            services.AddTransient<ILanguageService, LanguageService>();
+            services.AddTransient<IRoleService, RoleService>();
             services.AddTransient<IUserService, UserService>();
+
+            //services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
+            //services.AddTransient<IValidator<RegisterRequest>, RegisterRequestValidator>();
 
             services.AddControllers()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger Fresh Food Store", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger eShop Solution", Version = "v1" });
+
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n
@@ -113,7 +122,6 @@ namespace FFS.Backend
                 };
             });
         }
-        
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -135,11 +143,12 @@ namespace FFS.Backend
             app.UseRouting();
 
             app.UseAuthorization();
+
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger Fresh Food Store V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger eShopSolution V1");
             });
 
             app.UseEndpoints(endpoints =>

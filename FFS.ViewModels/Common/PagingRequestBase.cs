@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FFS.ViewModels.Common
 {
-    public class PagingRequestBase
+    public class PagingRequestBase 
     {
         public int PageIndex { get; set; }
 

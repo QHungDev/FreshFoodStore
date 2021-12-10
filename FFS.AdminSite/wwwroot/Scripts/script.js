@@ -1,6 +1,6 @@
 ﻿
 (function ($) {
-
+	
 	//"use strict";
 
 	//var fullHeight = function () {
@@ -42,21 +42,6 @@ btn.on('click', function (e) {
 
 
 
-function loginRedirectToDefault() {
-	//Đằng nhập thanhg công, đang chuyển đến trang chủ...
-
-	var count = 2;
-
-	setInterval(function () {
-		$(".message").html("Đăng nhập thanhg công, đang chuyển đến trang chủ sau " + count + "s...");
-		count--;
-
-		if (count < 0) {
-			location.href = '/admin/Default.aspx'
-		}
-	}, 1000);
-
-}
 
 //Reviews
 $(document).ready(function () {
@@ -81,7 +66,6 @@ $(document).ready(function () {
 	//});
 
 });
-
 /*Excel*/
 function exportTableToExcel(tableID, filename = '') {
 	var downloadLink;
