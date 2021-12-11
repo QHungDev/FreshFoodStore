@@ -1,3 +1,4 @@
+using FFS.Application.Catalog.Categories;
 using FFS.Application.Catalog.Products;
 using FFS.Application.Common;
 using FFS.Application.System.Languages;
@@ -49,6 +50,7 @@ namespace FFS.Backend
             services.AddTransient<IStorageService, FileStorageService>();
 
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
             services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
             services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();

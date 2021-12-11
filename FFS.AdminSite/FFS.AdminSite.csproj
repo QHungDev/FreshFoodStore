@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FFS.ApiIntegration\FFS.ApiIntegration.csproj" />
     <ProjectReference Include="..\FFS.Utilities\FFS.Utilities.csproj" />
     <ProjectReference Include="..\FFS.ViewModels\FFS.ViewModels.csproj" />
   </ItemGroup>

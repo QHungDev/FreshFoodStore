@@ -36,17 +36,17 @@ namespace FFS.Data.Migrations
                         new
                         {
                             Key = "HomeTitle",
-                            Value = "This is home page of eShopSolution"
+                            Value = "This is home page of Fresh Food Store"
                         },
                         new
                         {
                             Key = "HomeKeyword",
-                            Value = "This is keyword of eShopSolution"
+                            Value = "This is keyword of Fresh Food Store"
                         },
                         new
                         {
                             Key = "HomeDescription",
-                            Value = "This is description of eShopSolution"
+                            Value = "This is description of Fresh Food Store"
                         });
                 });
 
@@ -78,7 +78,7 @@ namespace FFS.Data.Migrations
                         new
                         {
                             Id = new Guid("c28f66ae-186e-4c5f-9df3-86b07f431013"),
-                            ConcurrencyStamp = "9feff3a0-69dc-42db-9918-996da6a6b82f",
+                            ConcurrencyStamp = "97154944-5a22-4281-a9c7-a1e37c4ac0ef",
                             Description = "Administrator Role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -155,16 +155,16 @@ namespace FFS.Data.Migrations
                         {
                             Id = new Guid("c0d575dd-ee8b-4905-8fca-59f5ac4a05cd"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7697ec6c-1999-4dfd-a4e6-096828be52f7",
+                            ConcurrencyStamp = "1f2967f1-3107-4921-aaf7-34eea83ac733",
                             Dob = new DateTime(2021, 12, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "truongquochung204@gmail.com",
                             EmailConfirmed = true,
-                            FirstName = "Toan",
-                            LastName = "Bach",
+                            FirstName = "Quoc",
+                            LastName = "Hung",
                             LockoutEnabled = false,
                             NormalizedEmail = "truongquochung204@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEM3xIKk4ZUdFw/owMxAlGgIH0gKAjNT2HqU7HOuscWzFz2tfYUr8OheWLJRCLwu4XA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELM05+wWj2IoPSJSr+zTbF/qrKD0zUWwo38Q0pXnMg8MI24/RCpqmqFVE91E+VpWJw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -296,41 +296,41 @@ namespace FFS.Data.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            LanguageId = "vi-VN",
-                            Name = "Áo nam",
-                            SeoAlias = "ao-nam",
-                            SeoDescription = "Sản phẩm áo thời trang nam",
-                            SeoTitle = "Sản phẩm áo thời trang nam"
+                            LanguageId = "vi",
+                            Name = "Các loại hạt",
+                            SeoAlias = "cac-loai-hat",
+                            SeoDescription = "Sản phẩm làm từ hạt",
+                            SeoTitle = "Sản phẩm làm từ hạt"
                         },
                         new
                         {
                             Id = 2,
                             CategoryId = 1,
-                            LanguageId = "en-US",
-                            Name = "Men Shirt",
-                            SeoAlias = "men-shirt",
-                            SeoDescription = "The shirt products for men",
-                            SeoTitle = "The shirt products for men"
+                            LanguageId = "en",
+                            Name = "Nuts",
+                            SeoAlias = "nuts-nuts",
+                            SeoDescription = "Products made from seeds",
+                            SeoTitle = "Products made from seeds"
                         },
                         new
                         {
                             Id = 3,
                             CategoryId = 2,
-                            LanguageId = "vi-VN",
-                            Name = "Áo nữ",
-                            SeoAlias = "ao-nu",
-                            SeoDescription = "Sản phẩm áo thời trang nữ",
-                            SeoTitle = "Sản phẩm áo thời trang women"
+                            LanguageId = "vi",
+                            Name = "Rau, củ quả",
+                            SeoAlias = "rau-cu-qua",
+                            SeoDescription = "Sản phẩm làm từ rau,củ,quả",
+                            SeoTitle = "Sản phẩm làm từ rau,củ,quả"
                         },
                         new
                         {
                             Id = 4,
                             CategoryId = 2,
-                            LanguageId = "en-US",
-                            Name = "Women Shirt",
-                            SeoAlias = "women-shirt",
-                            SeoDescription = "The shirt products for women",
-                            SeoTitle = "The shirt products for women"
+                            LanguageId = "en",
+                            Name = "Vegetable",
+                            SeoAlias = "vega-vegatables",
+                            SeoDescription = "Products made from vegetables",
+                            SeoTitle = "Products made from vegetables"
                         });
                 });
 
@@ -392,13 +392,13 @@ namespace FFS.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "vi-VN",
+                            Id = "vi",
                             IsDefault = true,
                             Name = "Tiếng Việt"
                         },
                         new
                         {
-                            Id = "en-US",
+                            Id = "en",
                             IsDefault = false,
                             Name = "English"
                         });
@@ -511,7 +511,7 @@ namespace FFS.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2021, 12, 7, 7, 8, 41, 761, DateTimeKind.Local).AddTicks(3687),
+                            DateCreated = new DateTime(2021, 12, 12, 2, 12, 19, 665, DateTimeKind.Local).AddTicks(8514),
                             OriginalPrice = 100000m,
                             Price = 200000m,
                             Stock = 0,
@@ -634,26 +634,26 @@ namespace FFS.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Description = "Áo sơ mi nam trắng Việt Tiến",
-                            Details = "Áo sơ mi nam trắng Việt Tiến",
-                            LanguageId = "vi-VN",
-                            Name = "Áo sơ mi nam trắng Việt Tiến",
+                            Description = "Hạt dưa được làm từ 100% là hạt dưa thơm ngon, béo ngậy và không chứa phẩm màu độc hại",
+                            Details = "Hạt dưa được làm từ 100% là hạt dưa thơm ngon, béo ngậy và không chứa phẩm màu độc hại",
+                            LanguageId = "vi",
+                            Name = "Hạt Dưa 300g",
                             ProductId = 1,
-                            SeoAlias = "ao-so-mi-nam-trang-viet-tien",
-                            SeoDescription = "Áo sơ mi nam trắng Việt Tiến",
-                            SeoTitle = "Áo sơ mi nam trắng Việt Tiến"
+                            SeoAlias = "hat-dua-300g",
+                            SeoDescription = "Hạt dưa được làm từ 100% là hạt dưa thơm ngon, béo ngậy và không chứa phẩm màu độc hại",
+                            SeoTitle = "Hạt dưa được làm từ 100% là hạt dưa thơm ngon, béo ngậy và không chứa phẩm màu độc hại"
                         },
                         new
                         {
                             Id = 2,
-                            Description = "Viet Tien Men T-Shirt",
-                            Details = "Viet Tien Men T-Shirt",
-                            LanguageId = "en-US",
-                            Name = "Viet Tien Men T-Shirt",
+                            Description = "Melon seeds are made from 100% delicious, greasy melon seeds and do not contain harmful dyes",
+                            Details = "Melon seeds are made from 100% delicious, greasy melon seeds and do not contain harmful dyes",
+                            LanguageId = "en",
+                            Name = "Melon Seeds 300g",
                             ProductId = 1,
-                            SeoAlias = "viet-tien-men-t-shirt",
-                            SeoDescription = "Viet Tien Men T-Shirt",
-                            SeoTitle = "Viet Tien Men T-Shirt"
+                            SeoAlias = "Melon-Seeds-300g",
+                            SeoDescription = "Melon seeds are made from 100% delicious, greasy melon seeds and do not contain harmful dyes",
+                            SeoTitle = "Melon seeds are made from 100% delicious, greasy melon seeds and do not contain harmful dyes"
                         });
                 });
 

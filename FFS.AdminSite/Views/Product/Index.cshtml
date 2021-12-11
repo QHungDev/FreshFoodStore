@@ -28,9 +28,14 @@
                     </span>
                 </div>
                 <div class="panel-content">
-                    <div class="form-group row pb-0 p-2 border-secondary">
-                        <div class="col-md-5 text-center">
-                            <form asp-action="Index" method="get">
+                    <form asp-action="Index" method="get">
+                        <div class="form-group row pb-0 p-2 border-secondary">
+                            <div class="col-md-5">
+                                <select name="categoryId" onchange="this.form.submit()" asp-items="@ViewBag.Categories" class="form-control">
+                                    <option>--Chọn danh mục--</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5 text-center">
                                 <div class="row">
                                     <input type="text" value="@ViewBag.Keyword" name="keyword" class="form-control input-search" />
                                     <div class="cold-md-3">
@@ -38,13 +43,13 @@
                                         <button type="button" onclick="window.location.href='/Product/Index'" class="btn btn-dark">Reset</button>
                                     </div>
                                 </div>
-                            </form>
-                            @*<input id="input_Keyword" class="form-control input-search" type="text" placeholder="Tìm kiếm ....." />
-                                <a ID="LinkButton_Search" class="btn btn-success input-search-a">
-                                    <i class="fa fa-search"></i>&nbsp;
-                                </a>*@
+                                @*<input id="input_Keyword" class="form-control input-search" type="text" placeholder="Tìm kiếm ....." />
+                                    <a ID="LinkButton_Search" class="btn btn-success input-search-a">
+                                        <i class="fa fa-search"></i>&nbsp;
+                                    </a>*@
+                            </div>
                         </div>
-                    </div>
+                    </form>
                     @if (ViewBag.SuccessMsg != null)
                     {
                         <div id="msgAlert" class="alert alert-success" role="alert">
@@ -85,6 +90,7 @@
                                         @Html.ActionLink("Sửa", "Edit", new { id = item.Id }, new { @class = "btn btn-info text-white m-1 btn-block" })
                                         @Html.ActionLink("Xem", "Details", new { id = item.Id }, new { @class = "btn btn-secondary text-white m-1 btn-block" })
                                         @Html.ActionLink("Xóa", "Delete", new { id = item.Id }, new { @class = "btn btn-danger text-white m-1 btn-block" })
+                                        @Html.ActionLink("Gán danh mục", "CategoryAssign", new { id = item.Id }, new { @class = "btn btn-danger text-white m-1 btn-block" })
                                     </td>
                                 </tr>
                             }

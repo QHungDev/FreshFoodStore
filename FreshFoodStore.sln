@@ -20,7 +20,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFS.ViewModels", "FFS.ViewM
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFS.Backend", "FFS.Backend\FFS.Backend.csproj", "{A1C858B9-F72F-43A1-8A25-44D6389EBDD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFS.AdminSite", "FFS.AdminSite\FFS.AdminSite.csproj", "{BE43C909-88C4-42BA-9C49-B7F7854AE1DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFS.AdminSite", "FFS.AdminSite\FFS.AdminSite.csproj", "{BE43C909-88C4-42BA-9C49-B7F7854AE1DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFS.ApiIntegration", "FFS.ApiIntegration\FFS.ApiIntegration.csproj", "{03578DD9-8DAA-48C7-9EB7-C05EFF799504}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,6 +58,10 @@ Global
 		{BE43C909-88C4-42BA-9C49-B7F7854AE1DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE43C909-88C4-42BA-9C49-B7F7854AE1DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE43C909-88C4-42BA-9C49-B7F7854AE1DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03578DD9-8DAA-48C7-9EB7-C05EFF799504}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03578DD9-8DAA-48C7-9EB7-C05EFF799504}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03578DD9-8DAA-48C7-9EB7-C05EFF799504}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03578DD9-8DAA-48C7-9EB7-C05EFF799504}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

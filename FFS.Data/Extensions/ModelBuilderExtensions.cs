@@ -18,8 +18,8 @@ namespace FFS.Data.Extensions
                new AppConfig() { Key = "HomeDescription", Value = "This is description of Fresh Food Store" }
                );
             modelBuilder.Entity<Language>().HasData(
-                new Language() { Id = "vi-VN", Name = "Tiếng Việt", IsDefault = true },
-                new Language() { Id = "en-US", Name = "English", IsDefault = false });
+                new Language() { Id = "vi", Name = "Tiếng Việt", IsDefault = true },
+                new Language() { Id = "en", Name = "English", IsDefault = false });
 
             modelBuilder.Entity<Category>().HasData(
                 new Category()
@@ -40,10 +40,10 @@ namespace FFS.Data.Extensions
                  });
 
             modelBuilder.Entity<CategoryTranslation>().HasData(
-                  new CategoryTranslation() { Id = 1, CategoryId = 1, Name = "Áo nam", LanguageId = "vi-VN", SeoAlias = "ao-nam", SeoDescription = "Sản phẩm áo thời trang nam", SeoTitle = "Sản phẩm áo thời trang nam" },
-                  new CategoryTranslation() { Id = 2, CategoryId = 1, Name = "Men Shirt", LanguageId = "en-US", SeoAlias = "men-shirt", SeoDescription = "The shirt products for men", SeoTitle = "The shirt products for men" },
-                  new CategoryTranslation() { Id = 3, CategoryId = 2, Name = "Áo nữ", LanguageId = "vi-VN", SeoAlias = "ao-nu", SeoDescription = "Sản phẩm áo thời trang nữ", SeoTitle = "Sản phẩm áo thời trang women" },
-                  new CategoryTranslation() { Id = 4, CategoryId = 2, Name = "Women Shirt", LanguageId = "en-US", SeoAlias = "women-shirt", SeoDescription = "The shirt products for women", SeoTitle = "The shirt products for women" }
+                  new CategoryTranslation() { Id = 1, CategoryId = 1, Name = "Các loại hạt", LanguageId = "vi", SeoAlias = "cac-loai-hat", SeoDescription = "Sản phẩm làm từ hạt", SeoTitle = "Sản phẩm làm từ hạt" },
+                  new CategoryTranslation() { Id = 2, CategoryId = 1, Name = "Nuts", LanguageId = "en", SeoAlias = "nuts-nuts", SeoDescription = "Products made from seeds", SeoTitle = "Products made from seeds" },
+                  new CategoryTranslation() { Id = 3, CategoryId = 2, Name = "Rau, củ quả", LanguageId = "vi", SeoAlias = "rau-cu-qua", SeoDescription = "Sản phẩm làm từ rau,củ,quả", SeoTitle = "Sản phẩm làm từ rau,củ,quả" },
+                  new CategoryTranslation() { Id = 4, CategoryId = 2, Name = "Vegetable", LanguageId = "en", SeoAlias = "vega-vegatables", SeoDescription = "Products made from vegetables", SeoTitle = "Products made from vegetables" }
                     );
 
             modelBuilder.Entity<Product>().HasData(
@@ -61,25 +61,25 @@ namespace FFS.Data.Extensions
                  {
                      Id = 1,
                      ProductId = 1,
-                     Name = "Áo sơ mi nam trắng Việt Tiến",
-                     LanguageId = "vi-VN",
-                     SeoAlias = "ao-so-mi-nam-trang-viet-tien",
-                     SeoDescription = "Áo sơ mi nam trắng Việt Tiến",
-                     SeoTitle = "Áo sơ mi nam trắng Việt Tiến",
-                     Details = "Áo sơ mi nam trắng Việt Tiến",
-                     Description = "Áo sơ mi nam trắng Việt Tiến"
+                     Name = "Hạt Dưa 300g",
+                     LanguageId = "vi",
+                     SeoAlias = "hat-dua-300g",
+                     SeoDescription = "Hạt dưa được làm từ 100% là hạt dưa thơm ngon, béo ngậy và không chứa phẩm màu độc hại",
+                     SeoTitle = "Hạt dưa được làm từ 100% là hạt dưa thơm ngon, béo ngậy và không chứa phẩm màu độc hại",
+                     Details = "Hạt dưa được làm từ 100% là hạt dưa thơm ngon, béo ngậy và không chứa phẩm màu độc hại",
+                     Description = "Hạt dưa được làm từ 100% là hạt dưa thơm ngon, béo ngậy và không chứa phẩm màu độc hại"
                  },
                     new ProductTranslation()
                     {
                         Id = 2,
                         ProductId = 1,
-                        Name = "Viet Tien Men T-Shirt",
-                        LanguageId = "en-US",
-                        SeoAlias = "viet-tien-men-t-shirt",
-                        SeoDescription = "Viet Tien Men T-Shirt",
-                        SeoTitle = "Viet Tien Men T-Shirt",
-                        Details = "Viet Tien Men T-Shirt",
-                        Description = "Viet Tien Men T-Shirt"
+                        Name = "Melon Seeds 300g",
+                        LanguageId = "en",
+                        SeoAlias = "Melon-Seeds-300g",
+                        SeoDescription = "Melon seeds are made from 100% delicious, greasy melon seeds and do not contain harmful dyes",
+                        SeoTitle = "Melon seeds are made from 100% delicious, greasy melon seeds and do not contain harmful dyes",
+                        Details = "Melon seeds are made from 100% delicious, greasy melon seeds and do not contain harmful dyes",
+                        Description = "Melon seeds are made from 100% delicious, greasy melon seeds and do not contain harmful dyes"
                     });
             modelBuilder.Entity<ProductInCategory>().HasData(
                 new ProductInCategory() { ProductId = 1, CategoryId = 1 }
