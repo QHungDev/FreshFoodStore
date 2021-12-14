@@ -121,6 +121,15 @@
     <value>Bài viết</value>
     <comment>Layout</comment>
   </data>
+  <data name="Cam kết vì sức khỏe cộng đồng" xml:space="preserve">
+    <value>Cam kết vì sức khỏe cộng đồng</value>
+  </data>
+  <data name="categoryUrl" xml:space="preserve">
+    <value>danh-muc</value>
+  </data>
+  <data name="Chứng chỉ hữu cơ" xml:space="preserve">
+    <value>Chứng chỉ hữu cơ</value>
+  </data>
   <data name="Danh mục" xml:space="preserve">
     <value>Danh mục</value>
     <comment>Layout</comment>
@@ -128,13 +137,38 @@
   <data name="English" xml:space="preserve">
     <value>Tiếng Anh</value>
   </data>
+  <data name="Giao hàng nhanh" xml:space="preserve">
+    <value>Giao hàng nhanh</value>
+  </data>
+  <data name="Giảm 25% cho lần mua hàng đầu tiên!" xml:space="preserve">
+    <value>Giảm 25% cho lần mua hàng đầu tiên!</value>
+  </data>
   <data name="Liên hệ" xml:space="preserve">
     <value>Liên hệ</value>
     <comment>Layout</comment>
   </data>
+  <data name="Lợi cho sức khỏe" xml:space="preserve">
+    <value>Lợi cho sức khỏe</value>
+  </data>
+  <data name="Mua ngay" xml:space="preserve">
+    <value>Mua ngay</value>
+  </data>
+  <data name="Mặt hàng mới nhất" xml:space="preserve">
+    <value>Mặt hàng mới nhất</value>
+  </data>
   <data name="Mặt hàng nổi bật" xml:space="preserve">
     <value>Mặt hàng nổi bật</value>
     <comment>/Home/Index</comment>
+  </data>
+  <data name="productUrl" xml:space="preserve">
+    <value>san-pham</value>
+  </data>
+  <data name="Sản phẩm có chất lượng tốt nhất" xml:space="preserve">
+    <value>Sản phẩm có chất lượng tốt nhất</value>
+    <comment>Layout</comment>
+  </data>
+  <data name="Thực phẩm sạch. Có lợi cho sức khỏe. Không chất cấm." xml:space="preserve">
+    <value>Thực phẩm sạch. Có lợi cho sức khỏe. Không chất cấm.</value>
   </data>
   <data name="Trang chủ" xml:space="preserve">
     <value>Trang chủ</value>
@@ -143,8 +177,23 @@
   <data name="Vietnamese" xml:space="preserve">
     <value>Tiếng Việt</value>
   </data>
+  <data name="Xanh, Sạch" xml:space="preserve">
+    <value>Xanh, Sạch</value>
+  </data>
+  <data name="XEM NGAY" xml:space="preserve">
+    <value>XEM NGAY</value>
+  </data>
+  <data name="Đăng ký" xml:space="preserve">
+    <value>Đăng ký</value>
+  </data>
+  <data name="Đăng Ký Ngay Để Nhận Ưu Đãi." xml:space="preserve">
+    <value>Đăng Ký Ngay Để Nhận Ưu Đãi.</value>
+  </data>
   <data name="Đăng nhập" xml:space="preserve">
     <value>Đăng nhập</value>
     <comment>Layout</comment>
+  </data>
+  <data name="Đăng xuất" xml:space="preserve">
+    <value>Đăng xuất</value>
   </data>
 </root>

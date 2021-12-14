@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FFS.Data.Migrations
 {
     [DbContext(typeof(FFSDbContext))]
-    [Migration("20211211191220_Initial")]
+    [Migration("20211212141855_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -80,7 +80,7 @@ namespace FFS.Data.Migrations
                         new
                         {
                             Id = new Guid("c28f66ae-186e-4c5f-9df3-86b07f431013"),
-                            ConcurrencyStamp = "97154944-5a22-4281-a9c7-a1e37c4ac0ef",
+                            ConcurrencyStamp = "d06631c0-ca28-4653-a7a2-6342a7d28f10",
                             Description = "Administrator Role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -157,7 +157,7 @@ namespace FFS.Data.Migrations
                         {
                             Id = new Guid("c0d575dd-ee8b-4905-8fca-59f5ac4a05cd"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1f2967f1-3107-4921-aaf7-34eea83ac733",
+                            ConcurrencyStamp = "6bfe0248-638a-4282-a4a2-22f922f9ff6e",
                             Dob = new DateTime(2021, 12, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "truongquochung204@gmail.com",
                             EmailConfirmed = true,
@@ -166,7 +166,7 @@ namespace FFS.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "truongquochung204@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAELM05+wWj2IoPSJSr+zTbF/qrKD0zUWwo38Q0pXnMg8MI24/RCpqmqFVE91E+VpWJw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFDCnUGkBVcUGb4eOqLJVNlVI/ltULjPAx1jc9n6lSmUfsVJWTSrCj92aPq87T3XTg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -481,6 +481,8 @@ namespace FFS.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DateCreated")
@@ -513,7 +515,7 @@ namespace FFS.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2021, 12, 12, 2, 12, 19, 665, DateTimeKind.Local).AddTicks(8514),
+                            DateCreated = new DateTime(2021, 12, 12, 21, 18, 55, 218, DateTimeKind.Local).AddTicks(9254),
                             OriginalPrice = 100000m,
                             Price = 200000m,
                             Stock = 0,
@@ -596,8 +598,8 @@ namespace FFS.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Details")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
+                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(10000);
 
                     b.Property<string>("LanguageId")
                         .IsRequired()
@@ -699,6 +701,78 @@ namespace FFS.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Promotions");
+                });
+
+            modelBuilder.Entity("FFS.Data.Entities.Slide", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Slides");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
+                            Image = "images/hinh-anh-trang-chu/banner/banner-1.png",
+                            Name = "Second Thumbnail label",
+                            SortOrder = 1,
+                            Status = 1,
+                            Url = "#"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
+                            Image = "images/hinh-anh-trang-chu/banner/banner-2.png",
+                            Name = "Second Thumbnail label",
+                            SortOrder = 2,
+                            Status = 1,
+                            Url = "#"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.",
+                            Image = "images/hinh-anh-trang-chu/banner/banner-3.jpg",
+                            Name = "Second Thumbnail label",
+                            SortOrder = 3,
+                            Status = 1,
+                            Url = "#"
+                        });
                 });
 
             modelBuilder.Entity("FFS.Data.Entities.Transaction", b =>

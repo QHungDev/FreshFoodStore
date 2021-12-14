@@ -117,6 +117,11 @@ namespace FFS.Data.Extensions
                 RoleId = roleId,
                 UserId = adminId
             });
+            modelBuilder.Entity<Slide>().HasData(
+              new Slide() { Id = 1, Name = "Second Thumbnail label", Description = "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.", SortOrder = 1, Url = "#", Image = "images/hinh-anh-trang-chu/banner/banner-1.png", Status = Status.Active },
+              new Slide() { Id = 2, Name = "Second Thumbnail label", Description = "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.", SortOrder = 2, Url = "#", Image = "images/hinh-anh-trang-chu/banner/banner-2.png", Status = Status.Active },
+              new Slide() { Id = 3, Name = "Second Thumbnail label", Description = "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.", SortOrder = 3, Url = "#", Image = "images/hinh-anh-trang-chu/banner/banner-3.jpg", Status = Status.Active }
+              );
         }
 
 

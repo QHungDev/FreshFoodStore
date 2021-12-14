@@ -218,6 +218,24 @@ namespace FFS.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Slides",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(maxLength: 200, nullable: false),
+                    Description = table.Column<string>(maxLength: 200, nullable: false),
+                    Url = table.Column<string>(maxLength: 200, nullable: false),
+                    Image = table.Column<string>(maxLength: 200, nullable: false),
+                    SortOrder = table.Column<int>(nullable: false),
+                    Status = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Slides", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
@@ -387,7 +405,7 @@ namespace FFS.Data.Migrations
                     ProductId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(maxLength: 200, nullable: false),
                     Description = table.Column<string>(nullable: true),
-                    Details = table.Column<string>(maxLength: 500, nullable: true),
+                    Details = table.Column<string>(maxLength: 10000, nullable: true),
                     SeoDescription = table.Column<string>(nullable: true),
                     SeoTitle = table.Column<string>(nullable: true),
                     SeoAlias = table.Column<string>(maxLength: 200, nullable: false),
@@ -439,7 +457,7 @@ namespace FFS.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AppRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
-                values: new object[] { new Guid("c28f66ae-186e-4c5f-9df3-86b07f431013"), "97154944-5a22-4281-a9c7-a1e37c4ac0ef", "Administrator Role", "admin", "admin" });
+                values: new object[] { new Guid("c28f66ae-186e-4c5f-9df3-86b07f431013"), "d06631c0-ca28-4653-a7a2-6342a7d28f10", "Administrator Role", "admin", "admin" });
 
             migrationBuilder.InsertData(
                 table: "AppUserRoles",
@@ -449,7 +467,7 @@ namespace FFS.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AppUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Dob", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("c0d575dd-ee8b-4905-8fca-59f5ac4a05cd"), 0, "1f2967f1-3107-4921-aaf7-34eea83ac733", new DateTime(2021, 12, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "truongquochung204@gmail.com", true, "Quoc", "Hung", false, null, "truongquochung204@gmail.com", "admin", "AQAAAAEAACcQAAAAELM05+wWj2IoPSJSr+zTbF/qrKD0zUWwo38Q0pXnMg8MI24/RCpqmqFVE91E+VpWJw==", null, false, "", false, "admin" });
+                values: new object[] { new Guid("c0d575dd-ee8b-4905-8fca-59f5ac4a05cd"), 0, "6bfe0248-638a-4282-a4a2-22f922f9ff6e", new DateTime(2021, 12, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "truongquochung204@gmail.com", true, "Quoc", "Hung", false, null, "truongquochung204@gmail.com", "admin", "AQAAAAEAACcQAAAAEFDCnUGkBVcUGb4eOqLJVNlVI/ltULjPAx1jc9n6lSmUfsVJWTSrCj92aPq87T3XTg==", null, false, "", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "Appconfigs",
@@ -482,7 +500,17 @@ namespace FFS.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "Id", "DateCreated", "IsFeatured", "OriginalPrice", "Price" },
-                values: new object[] { 1, new DateTime(2021, 12, 12, 2, 12, 19, 665, DateTimeKind.Local).AddTicks(8514), null, 100000m, 200000m });
+                values: new object[] { 1, new DateTime(2021, 12, 12, 21, 18, 55, 218, DateTimeKind.Local).AddTicks(9254), null, 100000m, 200000m });
+
+            migrationBuilder.InsertData(
+                table: "Slides",
+                columns: new[] { "Id", "Description", "Image", "Name", "SortOrder", "Status", "Url" },
+                values: new object[,]
+                {
+                    { 1, "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.", "images/hinh-anh-trang-chu/banner/banner-1.png", "Second Thumbnail label", 1, 1, "#" },
+                    { 2, "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.", "images/hinh-anh-trang-chu/banner/banner-2.png", "Second Thumbnail label", 2, 1, "#" },
+                    { 3, "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.", "images/hinh-anh-trang-chu/banner/banner-3.jpg", "Second Thumbnail label", 3, 1, "#" }
+                });
 
             migrationBuilder.InsertData(
                 table: "CategoryTranslations",
@@ -611,6 +639,9 @@ namespace FFS.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Promotions");
+
+            migrationBuilder.DropTable(
+                name: "Slides");
 
             migrationBuilder.DropTable(
                 name: "Transactions");

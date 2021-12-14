@@ -4,6 +4,7 @@ using FFS.Application.Common;
 using FFS.Application.System.Languages;
 using FFS.Application.System.Roles;
 using FFS.Application.System.Users;
+using FFS.Application.Utilities.Slides;
 using FFS.Data.EF;
 using FFS.Data.Entities;
 using FFS.Utilities.Constants;
@@ -57,7 +58,7 @@ namespace FFS.Backend
             services.AddTransient<ILanguageService, LanguageService>();
             services.AddTransient<IRoleService, RoleService>();
             services.AddTransient<IUserService, UserService>();
-
+            services.AddTransient<ISlideService, SlideService>();
             //services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
             //services.AddTransient<IValidator<RegisterRequest>, RegisterRequestValidator>();
 

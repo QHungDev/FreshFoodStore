@@ -1,73 +1,80 @@
-﻿@{
+﻿@model HomeViewModel;
+@using FFS.ViewModels.Catalog.Products;
+@inject LazZiya.ExpressLocalization.ISharedCultureLocalizer _loc;
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration;
+
+@{
+    var culture = CultureInfo.CurrentCulture.Name;
+}
+@{
     ViewData["Title"] = "Home Page";
 }
+
 @section slider{ <div class="first">
-    <div class="background-leaf"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-6">
-                <div class="banner">
-                    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <a href="#"><img src="images/hinh-anh-trang-chu/banner/banner-1.png" class="d-block w-100" alt="..."></a>
-                            </div>
-                            <div class="carousel-item">
-                                <a href="#"><img src="images/hinh-anh-trang-chu/banner/banner-2.png" class="d-block w-100" alt="..."></a>
-                            </div>
-                            <div class="carousel-item">
-                                <a href="#"><img src="images/hinh-anh-trang-chu/banner/banner-3.jpg" class="d-block w-100" alt="..."></a>
+        <div class="background-leaf"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <div class="banner">
+                        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                @for (int index = 0; index < Model.Slides.Count; index++)
+                                {
+                                    var slide = Model.Slides[index];
+                                    <div class="carousel-item @(index==0?"active":"")">
+                                        <a href="@slide.Url"><img src="@slide.Image" class="d-block w-100" alt="@slide.Name"></a>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-6">
-                <div class="right">
-                    <img class="my-3" src="images/hinh-anh-trang-chu/logo-leaf.png" />
-                    <h5>
-                        Sản phẩm có chất lượng tốt nhất
-                    </h5>
-                    <h1>
-                        Cam kết vì sức khỏe cộng đồng
-                    </h1>
-                    <p>
-                        Thực phẩm sạch. Có lợi cho sức khỏe. Không chất cấm.
-                    </p>
-                    <a href="detail.html" class="btn btn-success">
-                        <i class="fa fa-cart-plus"></i>
-                        Mua ngay
-                    </a>
+                <div class="col-6">
+                    <div class="right">
+                        <img class="my-3" src="images/hinh-anh-trang-chu/logo-leaf.png" />
+                        <h5 localize-content>
+                            Sản phẩm có chất lượng tốt nhất
+                        </h5>
+                        <h1 localize-content>
+                            Cam kết vì sức khỏe cộng đồng
+                        </h1>
+                        <p localize-content>
+                            Thực phẩm sạch. Có lợi cho sức khỏe. Không chất cấm.
+                        </p>
+                        <a href="detail.html" class="btn btn-success">
+                            <i class="fa fa-cart-plus"></i>
+                            <localize>Mua ngay</localize>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>}
+    </div>}
 
 <div class="row certificate">
     <div class="col-2"></div>
     <div class="col-2">
         <div class="chungchi">
             <i class="fa fa-truck"></i>
-            Giao hàng nhanh
+            <localize>Giao hàng nhanh</localize>
         </div>
     </div>
     <div class="col-2">
         <div class="chungchi">
             <i class="fa fa-address-book-o"></i>
-            Chứng chỉ hữu cơ
+            <localize>Chứng chỉ hữu cơ</localize>
         </div>
     </div>
     <div class="col-2">
         <div class="chungchi">
             <i class="fa fa-heart-o"></i>
-            Lợi cho sức khỏe
+            <localize>Lợi cho sức khỏe</localize>
         </div>
     </div>
     <div class="col-2">
         <div class="chungchi">
             <i class="fa fa-refresh"></i>
-            Xanh, Sạch
+            <localize>Xanh, Sạch</localize>
         </div>
     </div>
     <div class="col-2"></div>
@@ -82,293 +89,34 @@
     </div>
     <div class="product-item">
         <ul>
-            <li class="item">
-                <a href="detail.html" class="product-image">
-                    <img src="images/product/rau-qua.png">
-                </a>
-                <div class="info-box">
-                    <p class="product-name mb-1">
-                        <a href="detail.html"> Rau quả tươi sạch </a>
-                    </p>
-                    <div class="price-box">
-                        <span class="old-price">
-                            120.000&nbsp;₫
-                        </span>
-                        <span class="price">
-                            108.000&nbsp;₫
-                        </span>
-                        <span class="sale">-10%</span>
-                        <a href="detail.html" class="btn btn-success">
-                            <i class="fa fa-shopping-cart"></i>
-                            XEM NGAY
-                        </a>
+            @foreach (var item in Model.FeaturedProducts)
+            {
+                var url = $"/{culture}/{_loc["productUrl"]}/{item.Id}";
+                <li class="item">
+                    <a href="@url" class="product-image">
+                        <img src="@(Configuration["BaseAddress"] + item.ThumbnailImage)">
+                    </a>
+                    <div class="info-box">
+                        <p class="product-name mb-1">
+                            <a href="detail.html">@item.Name</a>
+                        </p>
+                        <div class="price-box">
+                            <span class="old-price">
+                                @item.OriginalPrice.ToString()&nbsp;₫
+                            </span>
+                            <span class="price">
+                                @item.Price.ToString()&nbsp;₫
+                            </span>
+                            <span class="sale">-10%</span>
+                            <a href="@url" class="btn btn-success">
+                                <i class="fa fa-shopping-cart"></i>
+                                <localize> XEM NGAY</localize>
+                            </a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
+            }
 
-            <li class="item">
-                <a href="detail.html" class="product-image">
-                    <img src="images/product/rau-qua.png">
-                </a>
-                <div class="info-box">
-                    <p class="product-name mb-1">
-                        <a href="detail.html"> Rau quả tươi sạch </a>
-                    </p>
-                    <div class="price-box">
-                        <span class="old-price">
-                            120.000&nbsp;₫
-                        </span>
-                        <span class="price">
-                            108.000&nbsp;₫
-                        </span>
-                        <span class="sale">-10%</span>
-                        <a href="detail.html" class="btn btn-success">
-                            <i class="fa fa-shopping-cart"></i>
-                            XEM NGAY
-                        </a>
-                    </div>
-                </div>
-            </li>
-
-            <li class="item">
-                <a href="detail.html" class="product-image">
-                    <img src="images/product/rau-qua.png">
-                </a>
-                <div class="info-box">
-                    <p class="product-name mb-1">
-                        <a href="detail.html"> Rau quả tươi sạch </a>
-                    </p>
-                    <div class="price-box">
-                        <span class="old-price">
-                            120.000&nbsp;₫
-                        </span>
-                        <span class="price">
-                            108.000&nbsp;₫
-                        </span>
-                        <span class="sale">-10%</span>
-                        <a href="detail.html" class="btn btn-success">
-                            <i class="fa fa-shopping-cart"></i>
-                            XEM NGAY
-                        </a>
-                    </div>
-                </div>
-            </li>
-
-            <li class="item">
-                <a href="detail.html" class="product-image">
-                    <img src="images/product/rau-qua.png">
-                </a>
-                <div class="info-box">
-                    <p class="product-name mb-1">
-                        <a href="detail.html"> Rau quả tươi sạch </a>
-                    </p>
-                    <div class="price-box">
-                        <span class="old-price">
-                            120.000&nbsp;₫
-                        </span>
-                        <span class="price">
-                            108.000&nbsp;₫
-                        </span>
-                        <span class="sale">-10%</span>
-                        <a href="detail.html" class="btn btn-success">
-                            <i class="fa fa-shopping-cart"></i>
-                            XEM NGAY
-                        </a>
-                    </div>
-                </div>
-            </li>
-
-            <li class="item">
-                <a href="detail.html" class="product-image">
-                    <img src="images/product/rau-qua.png">
-                </a>
-                <div class="info-box">
-                    <p class="product-name mb-1">
-                        <a href="detail.html"> Rau quả tươi sạch </a>
-                    </p>
-                    <div class="price-box">
-                        <span class="old-price">
-                            120.000&nbsp;₫
-                        </span>
-                        <span class="price">
-                            108.000&nbsp;₫
-                        </span>
-                        <span class="sale">-10%</span>
-                        <a href="detail.html" class="btn btn-success">
-                            <i class="fa fa-shopping-cart"></i>
-                            XEM NGAY
-                        </a>
-                    </div>
-                </div>
-            </li>
-
-            <li class="item">
-                <a href="detail.html" class="product-image">
-                    <img src="images/product/rau-qua.png">
-                </a>
-                <div class="info-box">
-                    <p class="product-name mb-1">
-                        <a href="detail.html"> Rau quả tươi sạch </a>
-                    </p>
-                    <div class="price-box">
-                        <span class="old-price">
-                            120.000&nbsp;₫
-                        </span>
-                        <span class="price">
-                            108.000&nbsp;₫
-                        </span>
-                        <span class="sale">-10%</span>
-                        <a href="detail.html" class="btn btn-success">
-                            <i class="fa fa-shopping-cart"></i>
-                            XEM NGAY
-                        </a>
-                    </div>
-                </div>
-            </li>
-
-            <li class="item">
-                <a href="detail.html" class="product-image">
-                    <img src="images/product/rau-qua.png">
-                </a>
-                <div class="info-box">
-                    <p class="product-name mb-1">
-                        <a href="detail.html"> Rau quả tươi sạch </a>
-                    </p>
-                    <div class="price-box">
-                        <span class="old-price">
-                            120.000&nbsp;₫
-                        </span>
-                        <span class="price">
-                            108.000&nbsp;₫
-                        </span>
-                        <span class="sale">-10%</span>
-                        <a href="detail.html" class="btn btn-success">
-                            <i class="fa fa-shopping-cart"></i>
-                            XEM NGAY
-                        </a>
-                    </div>
-                </div>
-            </li>
-
-            <li class="item">
-                <a href="detail.html" class="product-image">
-                    <img src="images/product/rau-qua.png">
-                </a>
-                <div class="info-box">
-                    <p class="product-name mb-1">
-                        <a href="detail.html"> Rau quả tươi sạch </a>
-                    </p>
-                    <div class="price-box">
-                        <span class="old-price">
-                            120.000&nbsp;₫
-                        </span>
-                        <span class="price">
-                            108.000&nbsp;₫
-                        </span>
-                        <span class="sale">-10%</span>
-                        <a href="detail.html" class="btn btn-success">
-                            <i class="fa fa-shopping-cart"></i>
-                            XEM NGAY
-                        </a>
-                    </div>
-                </div>
-            </li>
-
-            <li class="item">
-                <a href="detail.html" class="product-image">
-                    <img src="images/product/rau-qua.png">
-                </a>
-                <div class="info-box">
-                    <p class="product-name mb-1">
-                        <a href="detail.html"> Rau quả tươi sạch </a>
-                    </p>
-                    <div class="price-box">
-                        <span class="old-price">
-                            120.000&nbsp;₫
-                        </span>
-                        <span class="price">
-                            108.000&nbsp;₫
-                        </span>
-                        <span class="sale">-10%</span>
-                        <a href="detail.html" class="btn btn-success">
-                            <i class="fa fa-shopping-cart"></i>
-                            XEM NGAY
-                        </a>
-                    </div>
-                </div>
-            </li>
-
-            <li class="item">
-                <a href="detail.html" class="product-image">
-                    <img src="images/product/rau-qua.png">
-                </a>
-                <div class="info-box">
-                    <p class="product-name mb-1">
-                        <a href="detail.html"> Rau quả tươi sạch </a>
-                    </p>
-                    <div class="price-box">
-                        <span class="old-price">
-                            120.000&nbsp;₫
-                        </span>
-                        <span class="price">
-                            108.000&nbsp;₫
-                        </span>
-                        <span class="sale">-10%</span>
-                        <a href="detail.html" class="btn btn-success">
-                            <i class="fa fa-shopping-cart"></i>
-                            XEM NGAY
-                        </a>
-                    </div>
-                </div>
-            </li>
-
-            <li class="item">
-                <a href="detail.html" class="product-image">
-                    <img src="images/product/rau-qua.png">
-                </a>
-                <div class="info-box">
-                    <p class="product-name mb-1">
-                        <a href="detail.html"> Rau quả tươi sạch </a>
-                    </p>
-                    <div class="price-box">
-                        <span class="old-price">
-                            120.000&nbsp;₫
-                        </span>
-                        <span class="price">
-                            108.000&nbsp;₫
-                        </span>
-                        <span class="sale">-10%</span>
-                        <a href="detail.html" class="btn btn-success">
-                            <i class="fa fa-shopping-cart"></i>
-                            XEM NGAY
-                        </a>
-                    </div>
-                </div>
-            </li>
-
-            <li class="item">
-                <a href="detail.html" class="product-image">
-                    <img src="images/product/rau-qua.png">
-                </a>
-                <div class="info-box">
-                    <p class="product-name mb-1">
-                        <a href="detail.html"> Rau quả tươi sạch </a>
-                    </p>
-                    <div class="price-box">
-                        <span class="old-price">
-                            120.000&nbsp;₫
-                        </span>
-                        <span class="price">
-                            108.000&nbsp;₫
-                        </span>
-                        <span class="sale">-10%</span>
-                        <a href="detail.html" class="btn btn-success">
-                            <i class="fa fa-shopping-cart"></i>
-                            XEM NGAY
-                        </a>
-                    </div>
-                </div>
-            </li>
         </ul>
     </div>
 </div>
@@ -376,13 +124,13 @@
 <div class="row preferential">
     <div class="col-7">
         <div class="pull-right">
-            Giảm 25% cho lần mua hàng đầu tiên!
+            <localize>Giảm 25% cho lần mua hàng đầu tiên!</localize>
         </div>
     </div>
     <div class="col-5">
-        <a href="list-product.html" class="btn btn-secondary">
+        <a href="/" class="btn btn-secondary">
             <i class="fa fa-shopping-cart"></i>
-            MUA NGAY
+            <localize>MUA NGAY</localize>
         </a>
     </div>
     <div class="container">
@@ -393,7 +141,7 @@
 </div>
 <div class="for-registration">
     <div class="text-center">
-        <a href="login.html">Đăng Ký Ngay Để Nhận Ưu Đãi.</a>
+        <a href="login.html"><localize>Đăng Ký Ngay Để Nhận Ưu Đãi.</localize></a>
     </div>
 </div>
 
@@ -401,300 +149,40 @@
     <div class="background-leaf"></div>
     <div class="product container">
         <div class="the-title">
-            <h2>
-                Mặt hàng bắn chạy
+            <h2 localize-content>
+                Mặt hàng mới nhất
             </h2>
             <img class="img-fluid" src="images/hinh-anh-trang-chu/logo-leaf.png" />
         </div>
         <div class="product-item">
             <ul>
-                <li class="item">
-                    <a href="detail.html" class="product-image">
-                        <img src="images/product/rau-qua.png">
-                    </a>
-                    <div class="info-box">
-                        <p class="product-name mb-1">
-                            <a href="detail.html"> Rau quả tươi sạch </a>
-                        </p>
-                        <div class="price-box">
-                            <span class="old-price">
-                                120.000&nbsp;₫
-                            </span>
-                            <span class="price">
-                                108.000&nbsp;₫
-                            </span>
-                            <span class="sale">-10%</span>
-                            <a href="detail.html" class="btn btn-success">
-                                <i class="fa fa-shopping-cart"></i>
-                                XEM NGAY
-                            </a>
+                @foreach (var item in Model.LatestProducts)
+                {
+                    var url = $"/{culture}/{_loc["productUrl"]}/{item.Id}";
+                    <li class="item">
+                        <a href="@url" class="product-image">
+                            <img src="@(Configuration["BaseAddress"] + item.ThumbnailImage)">
+                        </a>
+                        <div class="info-box">
+                            <p class="product-name mb-1">
+                                <a href="detail.html"> @item.Name </a>
+                            </p>
+                            <div class="price-box">
+                                <span class="old-price">
+                                    @item.OriginalPrice&nbsp;₫
+                                </span>
+                                <span class="price">
+                                    @item.Price&nbsp;₫
+                                </span>
+                                <span class="sale">-10%</span>
+                                <a href="detail.html" class="btn btn-success">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    <localize> XEM NGAY</localize>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                </li>
-
-                <li class="item">
-                    <a href="detail.html" class="product-image">
-                        <img src="images/product/rau-qua.png">
-                    </a>
-                    <div class="info-box">
-                        <p class="product-name mb-1">
-                            <a href="detail.html"> Rau quả tươi sạch </a>
-                        </p>
-                        <div class="price-box">
-                            <span class="old-price">
-                                120.000&nbsp;₫
-                            </span>
-                            <span class="price">
-                                108.000&nbsp;₫
-                            </span>
-                            <span class="sale">-10%</span>
-                            <a href="detail.html" class="btn btn-success">
-                                <i class="fa fa-shopping-cart"></i>
-                                XEM NGAY
-                            </a>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="item">
-                    <a href="detail.html" class="product-image">
-                        <img src="images/product/rau-qua.png">
-                    </a>
-                    <div class="info-box">
-                        <p class="product-name mb-1">
-                            <a href="detail.html"> Rau quả tươi sạch </a>
-                        </p>
-                        <div class="price-box">
-                            <span class="old-price">
-                                120.000&nbsp;₫
-                            </span>
-                            <span class="price">
-                                108.000&nbsp;₫
-                            </span>
-                            <span class="sale">-10%</span>
-                            <a href="detail.html" class="btn btn-success">
-                                <i class="fa fa-shopping-cart"></i>
-                                XEM NGAY
-                            </a>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="item">
-                    <a href="detail.html" class="product-image">
-                        <img src="images/product/rau-qua.png">
-                    </a>
-                    <div class="info-box">
-                        <p class="product-name mb-1">
-                            <a href="detail.html"> Rau quả tươi sạch </a>
-                        </p>
-                        <div class="price-box">
-                            <span class="old-price">
-                                120.000&nbsp;₫
-                            </span>
-                            <span class="price">
-                                108.000&nbsp;₫
-                            </span>
-                            <span class="sale">-10%</span>
-                            <a href="detail.html" class="btn btn-success">
-                                <i class="fa fa-shopping-cart"></i>
-                                XEM NGAY
-                            </a>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="item">
-                    <a href="detail.html" class="product-image">
-                        <img src="images/product/rau-qua.png">
-                    </a>
-                    <div class="info-box">
-                        <p class="product-name mb-1">
-                            <a href="detail.html"> Rau quả tươi sạch </a>
-                        </p>
-                        <div class="price-box">
-                            <span class="old-price">
-                                120.000&nbsp;₫
-                            </span>
-                            <span class="price">
-                                108.000&nbsp;₫
-                            </span>
-                            <span class="sale">-10%</span>
-                            <a href="detail.html" class="btn btn-success">
-                                <i class="fa fa-shopping-cart"></i>
-                                XEM NGAY
-                            </a>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="item">
-                    <a href="detail.html" class="product-image">
-                        <img src="images/product/rau-qua.png">
-                    </a>
-                    <div class="info-box">
-                        <p class="product-name mb-1">
-                            <a href="detail.html"> Rau quả tươi sạch </a>
-                        </p>
-                        <div class="price-box">
-                            <span class="old-price">
-                                120.000&nbsp;₫
-                            </span>
-                            <span class="price">
-                                108.000&nbsp;₫
-                            </span>
-                            <span class="sale">-10%</span>
-                            <a href="detail.html" class="btn btn-success">
-                                <i class="fa fa-shopping-cart"></i>
-                                XEM NGAY
-                            </a>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="item">
-                    <a href="detail.html" class="product-image">
-                        <img src="images/product/rau-qua.png">
-                    </a>
-                    <div class="info-box">
-                        <p class="product-name mb-1">
-                            <a href="detail.html"> Rau quả tươi sạch </a>
-                        </p>
-                        <div class="price-box">
-                            <span class="old-price">
-                                120.000&nbsp;₫
-                            </span>
-                            <span class="price">
-                                108.000&nbsp;₫
-                            </span>
-                            <span class="sale">-10%</span>
-                            <a href="detail.html" class="btn btn-success">
-                                <i class="fa fa-shopping-cart"></i>
-                                XEM NGAY
-                            </a>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="item">
-                    <a href="detail.html" class="product-image">
-                        <img src="images/product/rau-qua.png">
-                    </a>
-                    <div class="info-box">
-                        <p class="product-name mb-1">
-                            <a href="detail.html"> Rau quả tươi sạch </a>
-                        </p>
-                        <div class="price-box">
-                            <span class="old-price">
-                                120.000&nbsp;₫
-                            </span>
-                            <span class="price">
-                                108.000&nbsp;₫
-                            </span>
-                            <span class="sale">-10%</span>
-                            <a href="detail.html" class="btn btn-success">
-                                <i class="fa fa-shopping-cart"></i>
-                                XEM NGAY
-                            </a>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="item">
-                    <a href="detail.html" class="product-image">
-                        <img src="images/product/rau-qua.png">
-                    </a>
-                    <div class="info-box">
-                        <p class="product-name mb-1">
-                            <a href="detail.html"> Rau quả tươi sạch </a>
-                        </p>
-                        <div class="price-box">
-                            <span class="old-price">
-                                120.000&nbsp;₫
-                            </span>
-                            <span class="price">
-                                108.000&nbsp;₫
-                            </span>
-                            <span class="sale">-10%</span>
-                            <a href="detail.html" class="btn btn-success">
-                                <i class="fa fa-shopping-cart"></i>
-                                XEM NGAY
-                            </a>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="item">
-                    <a href="detail.html" class="product-image">
-                        <img src="images/product/rau-qua.png">
-                    </a>
-                    <div class="info-box">
-                        <p class="product-name mb-1">
-                            <a href="detail.html"> Rau quả tươi sạch </a>
-                        </p>
-                        <div class="price-box">
-                            <span class="old-price">
-                                120.000&nbsp;₫
-                            </span>
-                            <span class="price">
-                                108.000&nbsp;₫
-                            </span>
-                            <span class="sale">-10%</span>
-                            <a href="detail.html" class="btn btn-success">
-                                <i class="fa fa-shopping-cart"></i>
-                                XEM NGAY
-                            </a>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="item">
-                    <a href="detail.html" class="product-image">
-                        <img src="images/product/rau-qua.png">
-                    </a>
-                    <div class="info-box">
-                        <p class="product-name mb-1">
-                            <a href="detail.html"> Rau quả tươi sạch </a>
-                        </p>
-                        <div class="price-box">
-                            <span class="old-price">
-                                120.000&nbsp;₫
-                            </span>
-                            <span class="price">
-                                108.000&nbsp;₫
-                            </span>
-                            <span class="sale">-10%</span>
-                            <a href="detail.html" class="btn btn-success">
-                                <i class="fa fa-shopping-cart"></i>
-                                XEM NGAY
-                            </a>
-                        </div>
-                    </div>
-                </li>
-
-                <li class="item">
-                    <a href="detail.html" class="product-image">
-                        <img src="images/product/rau-qua.png">
-                    </a>
-                    <div class="info-box">
-                        <p class="product-name mb-1">
-                            <a href="detail.html"> Rau quả tươi sạch </a>
-                        </p>
-                        <div class="price-box">
-                            <span class="old-price">
-                                120.000&nbsp;₫
-                            </span>
-                            <span class="price">
-                                108.000&nbsp;₫
-                            </span>
-                            <span class="sale">-10%</span>
-                            <a href="detail.html" class="btn btn-success">
-                                <i class="fa fa-shopping-cart"></i>
-                                XEM NGAY
-                            </a>
-                        </div>
-                    </div>
-                </li>
+                    </li>
+                }
             </ul>
         </div>
     </div>

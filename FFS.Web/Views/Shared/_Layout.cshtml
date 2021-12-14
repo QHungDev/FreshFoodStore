@@ -1,6 +1,9 @@
-﻿@{
+﻿@inject Microsoft.Extensions.Configuration.IConfiguration Configuration;
+@inject LazZiya.ExpressLocalization.ISharedCultureLocalizer _loc;
+@{
     var culture = CultureInfo.CurrentCulture.Name;
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +16,8 @@
     <link href="~/Content/style.css" rel="stylesheet" />
 </head>
 <body style="background-color: #fff">
+    <input type="hidden" id="hidCulture" value="@culture" />
+    <input type="hidden" id="hidBaseAddress" value="@Configuration["BaseAddress"]" />
     <header class="sticky-top">
         <nav id="main-menu" class="navbar navbar-expand-lg navbar-light bg-lightk">
             <div class="container">
@@ -36,46 +41,12 @@
                                 Trang chủ
                             </a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <div class="menu-product">
-                                <a class="nav-link dropdown-toggle" asp-route-culture="@culture" localize-content>
-                                    Danh mục
-                                </a>
-                                <ul class='level0'>
-                                    <li class="child">
-                                        <a href="list-product.html">Rau củ quả<i class="fa fa-angle-right"></i></a>
-                                        <ul class='level1 hidden-xs'>
-                                            <li><a href="list-product.html">Trái cây tươi</a></li>
-                                            <li><a href="#">Trái cây sấy</a></li>
-                                            <li><a href="#">Rau xanh</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="child">
-                                        <a href="#">Thức uống<i class="fa fa-angle-right"></i></a>
-                                        <ul class='level1 hidden-xs'>
-                                            <li><a href="#">Sữa</a></li>
-                                            <li><a href="#">Nước ép</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="child">
-                                        <a href="#">Chiết xuất</a>
-                                    </li>
-                                    <li class="child">
-                                        <a href="#">Các loại hạt<i class="fa fa-angle-right"></i></a>
-                                        <ul class='level1 hidden-xs'>
-                                            <li><a href="#">Gạo nếp</a></li>
-                                            <li><a href="#">Đậu</a></li>
-                                            <li><a href="#">Loại khác</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
+                        @await Component.InvokeAsync("CategoryComponents")
+                        <li class="nav-item">
+                            <a class="nav-link" asp-route-culture="@culture" localize-content>Bài viết</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-route-culture="@culture" localize-content >Bài viết</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-route-culture="@culture" localize-content >
+                            <a class="nav-link" asp-route-culture="@culture" localize-content>
                                 Liên hệ
                             </a>
                         </li>
@@ -85,20 +56,37 @@
                                     <i class="fa fa-user-circle"></i>
                                 </a>
                                 <ul>
-                                    <li>
-                                        <a href="#login" class="w-75" role="button" data-toggle="modal" style="padding-right:0">
-                                            <span class="btn btn-large btn-success"><localize>Đăng nhập</localize></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="w-75" href="login.html">Đăng ký</a>
-                                    </li>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <li>
+                                            <a class="w-75"> @User.Identity.Name</a>
+                                        </li>
+                                        <li class="w-75">
+                                            <form action="/@culture/Account/Logout" method="post">
+                                                <button type="submit">
+                                                    <localize>Đăng xuất</localize>
+                                                </button>
+                                            </form>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            <a class="w-75" href="/@culture/Account/Login">Đăng nhập</a>
+                                        </li>
+                                        <li>
+                                            <a class="w-75" href="/@culture/Account/Register">Đăng ký</a>
+                                        </li>
+                                    }
+
                                 </ul>
                             </div>
                         </li>
+
                         <li class="nav-item icon">
-                            <a class="nav-link" href="cart.html">
+                            <a class="nav-link giohang" href="/@culture/cart">
                                 <i class="fa fa-shopping-cart"></i>
+                                <span class="sogiohang" id="lbl_number_items_header">0</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -113,8 +101,8 @@
     </header>
 
     <main>
-        @RenderSection("slider", required: false);
-        @RenderBody();
+        @RenderSection("slider", required: false)
+        @RenderBody()
     </main>
 
     <footer>
@@ -195,6 +183,10 @@
         <script src="~/Scripts/bootstrap.js"></script>
         <script src="~/Scripts/script.js"></script>
     </div>
+    <script>
+        var site = new SiteController();
+        site.initialize();
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
