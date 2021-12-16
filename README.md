@@ -6,4 +6,7 @@
 - Microsoft.EntityFrameworkCore.SqlServer
 - Microsoft.EntityFrameworkCore.Tools
 - Microsoft.EntityFrameworkCore.Design
+- System.IdentityModel.Tokens.Jwt
+- FluentValidation.AspNetCore
+- Microsoft.AspNetCore.Identity
 ### How to use 
