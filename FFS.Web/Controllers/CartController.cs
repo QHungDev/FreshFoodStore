@@ -53,7 +53,7 @@ namespace FFS.Web.Controllers
                 OrderDetails = orderDetails
             };
             //TODO: Add to API
-            TempData["SuccessMsg"] = "Order puschased successful";
+            TempData["SuccessMsg"] = "Thanh toán thành công";
             return View(model);
         }
 

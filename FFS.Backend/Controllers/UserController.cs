@@ -16,9 +16,10 @@ namespace FFS.Backend.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
-
+       
         public UsersController(IUserService userService)
         {
+            
             _userService = userService;
         }
 
@@ -103,5 +104,6 @@ namespace FFS.Backend.Controllers
             var result = await _userService.Delete(id);
             return Ok(result);
         }
+        
     }
 }

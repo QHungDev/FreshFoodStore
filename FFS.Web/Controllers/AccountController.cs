@@ -22,7 +22,7 @@ namespace FFS.Web.Controllers
     {
         private readonly IUserApiClient _userApiClient;
         private readonly IConfiguration _configuration;
-
+       
         public AccountController(IUserApiClient userApiClient,
             IConfiguration configuration)
         {
@@ -130,5 +130,6 @@ namespace FFS.Web.Controllers
 
             return principal;
         }
+       
     }
 }

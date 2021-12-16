@@ -23,6 +23,5 @@ namespace FFS.Application.System.Users
 
         Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request);
 
-        
     }
 }

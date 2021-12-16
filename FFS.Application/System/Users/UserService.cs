@@ -2,6 +2,7 @@
 using FFS.ViewModels.Common;
 using FFS.ViewModels.System.Users;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -25,6 +26,7 @@ namespace FFS.Application.System.Users
         public UserService(UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
             RoleManager<AppRole> roleManager,
+
             IConfiguration config)
         {
             _userManager = userManager;
@@ -76,6 +78,7 @@ namespace FFS.Application.System.Users
 
             return new ApiErrorResult<bool>("Xóa không thành công");
         }
+
 
         public async Task<ApiResult<UserVm>> GetById(Guid id)
         {
@@ -165,6 +168,7 @@ namespace FFS.Application.System.Users
             }
             return new ApiErrorResult<bool>("Đăng ký không thành công");
         }
+
 
         public async Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request)
         {

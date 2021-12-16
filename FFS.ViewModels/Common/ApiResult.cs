@@ -11,5 +11,6 @@ namespace FFS.ViewModels.Common
         public string Message { get; set; }
 
         public T ResultObj { get; set; }
+        public IEnumerable<string> Errors { get; set; }
     }
 }
