@@ -1,5 +1,8 @@
 ﻿using FFS.Data.Configurations;
 using FFS.Data.Entities;
+using FFS.Data.Extensions;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +10,7 @@ using System.Text;
 
 namespace FFS.Data.EF
 {
-    public class FFSDbContext : DbContext
+    public class FFSDbContext : IdentityDbContext<AppUser, AppRole, Guid>
     {
         public FFSDbContext( DbContextOptions options) : base(options)
         {
@@ -15,6 +18,9 @@ namespace FFS.Data.EF
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Configure using Fluent API
+            modelBuilder.ApplyConfiguration(new CartConfiguration());
+
             modelBuilder.ApplyConfiguration(new AppConfigConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
@@ -29,12 +35,27 @@ namespace FFS.Data.EF
             modelBuilder.ApplyConfiguration(new PromotionConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
 
-            // base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new AppUserConfiguration());
+            modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductImageConfiguration());
+            modelBuilder.ApplyConfiguration(new SlideConfiguration());
+            modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims");
+            modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new { x.UserId, x.RoleId });
+            modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x => x.UserId);
+
+            modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims");
+            modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x => x.UserId);
+
+            //Data seeding
+            modelBuilder.Seed();
+            //base.OnModelCreating(modelBuilder);
         }
+
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<AppConfig> AppConfigs { get; set; }
+
 
         public DbSet<Cart> Carts { get; set; }
 
@@ -51,6 +72,7 @@ namespace FFS.Data.EF
         public DbSet<ProductTranslation> ProductTranslations { get; set; }
 
         public DbSet<Promotion> Promotions { get; set; }
+
 
         public DbSet<Transaction> Transactions { get; set; }
 
